@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">DJ</string>
+    <string-array name="user_type_array">
+        <item>DJ</item>
+        <item>Clubber</item>
+
+    </string-array>
+
+    <string-array name="genre_type_array">
+        <item>Trance</item>
+        <item>Dubstep</item>
+        <item>House</item>
+        <item>Hip hop</item>
+        <item>Pop</item>
+        <item>Rock</item>
+        <item>Trap</item>
+        <item>Techno</item>
+
+    </string-array>
+
+
+
+</resources>
