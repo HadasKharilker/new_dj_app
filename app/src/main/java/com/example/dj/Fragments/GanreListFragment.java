@@ -1,19 +1,30 @@
 package com.example.dj.Fragments;
 
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SearchView;
+
 import com.example.dj.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Clubber_Fragment#newInstance} factory method to
+ * Use the {@link GanreListFragment#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
-public class Clubber_Fragment extends Fragment {
+public class GanreListFragment extends Fragment {
+
+    ListView ganreList;
+    SearchView searchView;
+    ArrayAdapter<String> adapter;
+    String[] data = {"Hip Hop music", "Electronic dance music", "Rock"};
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,26 +35,26 @@ public class Clubber_Fragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    public GanreListFragment() {
+        // Required empty public constructor
+    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Clubber_Fragment.
+     * @return A new instance of fragment GanreListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Clubber_Fragment newInstance(String param1, String param2) {
-        Clubber_Fragment fragment = new Clubber_Fragment();
+    public static GanreListFragment newInstance(String param1, String param2) {
+        GanreListFragment fragment = new GanreListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public Clubber_Fragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -59,6 +70,11 @@ public class Clubber_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_clubber_, container, false);
+        View view = inflater.inflate(R.layout.fragment_ganre_list, container, false);
+        // פעולות נעשה פה
+        ganreList = (ListView) view.findViewById(R.id.idListView);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_gallery_item,data);
+        ganreList.setAdapter(adapter);
+        return  view;
     }
 }
