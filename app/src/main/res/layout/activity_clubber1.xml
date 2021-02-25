@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <FrameLayout tools:context=".Activities.Clubber1Activity" android:orientation="vertical" android:layout_height="match_parent" android:layout_width="match_parent" android:id="@+id/fragmentFrame" xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    -
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        -
+
+        <LinearLayout
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2.2"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="CLUBBER"
+                android:textColor="#1B1414"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+
+        -
+
+        <LinearLayout
+            android:id="@+id/threeButtons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2.15"
+            android:background="#575454"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/DjButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/djbutton"
+                android:onClick="loadDJsList"
+                android:text="DJ"
+                app:backgroundTint="#FFFFFF"
+                app:backgroundTintMode="multiply" />
+
+            <Button
+                android:id="@+id/ClubButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/club"
+                android:onClick="loadClubsList"
+                android:text="CLUB"
+                app:backgroundTint="#FFFFFF"
+                app:backgroundTintMode="multiply" />
+
+            <Button
+                android:id="@+id/GanreButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/ganre"
+                android:onClick="loadGanreList"
+                android:text="GANRE"
+                app:backgroundTint="#FFFFFF"
+                app:backgroundTintMode="multiply" />
+
+        </LinearLayout>
+
+
+        -
+
+        <LinearLayout
+            android:id="@+id/fragmentclubberlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/fragmentclubber"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </FrameLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
