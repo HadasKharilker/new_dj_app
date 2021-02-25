@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             FirebaseUser user = mAuth.getCurrentUser();
                             //moving to Main Activity layout if the login is successful
-                            funcButtonToMainActivity();
+                            funcButtonToClubber1Activity();
 
 
                         } else {
@@ -98,10 +98,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
     //moving to main activity of the app when clicking
-    public void funcButtonToMainActivity() {
+    public void funcButtonToClubber1Activity() {//CHANGE TO MOVING TO CLUBBER1ACTIVITY
 
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Clubber1Activity.class);
 
 
         startActivity(intent);
@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                                 //moving to Main Activity if the login is succesfull
-                                funcButtonToMainActivity();
+                                funcButtonToClubber1Activity();
                             }
                         }
                     });
