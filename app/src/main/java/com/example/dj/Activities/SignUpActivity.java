@@ -23,7 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-
     private final String KEY1 = "LoginKeyName";
     private Spinner spinnerU;
     private Spinner spinnerG;
@@ -84,6 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             //going to the relevant branch in the db
                             DatabaseReference myRef = database.getReference("users").child(uid);
+
                             //generate an object of type person
                             User u = new User(email, fullName, selectedUserType,selectedGenre);
 
@@ -106,6 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     }
+
 
 
     public void initUserTypeSpinner(SignUpActivity view){

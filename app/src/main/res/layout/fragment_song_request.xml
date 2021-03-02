@@ -20,7 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFFFFF"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:listSelector="@color/light_blue"
+
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -38,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="requestSongButtonListener"
             android:text="REQUEST" />
     </LinearLayout>
 
