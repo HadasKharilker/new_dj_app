@@ -7,11 +7,22 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.example.dj.Activities.Clubber2Activity;
 import com.example.dj.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,10 +31,12 @@ import com.example.dj.R;
  */
 public class SongRequestFragment extends Fragment {
 
-    ListView song;
-    SearchView searchView;
-    ArrayAdapter<String> adapter;
-    String[] data = {"The Business - Tiesto", "Mo Money Mo Problem - P Diddy", "Need U - Duke Dumon"};
+    private ListView songList;
+    private SearchView searchView;
+    private ArrayAdapter<String> adapter;
+    private String selectedSong;
+    private String djUID;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,10 +83,74 @@ public class SongRequestFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_song_request, container, false);
-        // פעולות נעשה פה
-        song = (ListView) view.findViewById(R.id.idListView);
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_gallery_item,data);
-        song.setAdapter(adapter);
-        return  view;
+        songList = (ListView) view.findViewById(R.id.idListView);
+        initSongsList(view);
+        requestSongButtonListener( view);
+
+        return view;
     }
+
+    public void initSongsList(View view) {
+
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference songsRef = rootRef.child("songs");//users branch reference from firebase database
+        List<String> list = new ArrayList<>();
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {//for each LOOP running through all songs
+
+                    String songName = ds.getValue(String.class);
+                    list.add(songName);//Adding songs name to the list
+                }
+
+                adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_gallery_item, list);//adapting the data int the array list to listView data
+                songList.setAdapter(adapter);//setting the adapter to the list view
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        songsRef.addListenerForSingleValueEvent(eventListener);
+
+
+        //adding onItemClickListener- when clicking on a song
+        songList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                selectedSong = list.get(position);
+
+
+            }
+        });
+
+    }
+
+
+
+
+    public void requestSongButtonListener(View view){
+        Button b = view.findViewById(R.id.SongRequestButton);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Clubber2Activity clubber2Activity =(Clubber2Activity)getActivity();
+                djUID =clubber2Activity.getDjUserId();//get the uid of the dj--> this return null ther is  bug here
+
+
+
+            }
+        });
+
+
+
+
+
+    }
+
 }
+

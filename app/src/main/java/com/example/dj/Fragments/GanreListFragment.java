@@ -20,10 +20,10 @@ import com.example.dj.R;
  */
 public class GanreListFragment extends Fragment {
 
-    ListView ganreList;
-    SearchView searchView;
-    ArrayAdapter<String> adapter;
-    String[] data = {"Hip Hop music", "Electronic dance music", "Rock"};
+   private ListView ganreList;
+   private   SearchView searchView;
+   private ArrayAdapter<String> adapter;
+   private String[] ganre ;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -72,8 +72,9 @@ public class GanreListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ganre_list, container, false);
         // פעולות נעשה פה
+        ganre=getResources().getStringArray(R.array.genre_type_array);
         ganreList = (ListView) view.findViewById(R.id.idListView);
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_gallery_item,data);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_gallery_item,ganre);
         ganreList.setAdapter(adapter);
         return  view;
     }

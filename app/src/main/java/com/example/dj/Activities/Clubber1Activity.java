@@ -25,6 +25,7 @@ public class Clubber1Activity extends AppCompatActivity {//replace AppCompatActi
 
     private FragmentManager fragmentManager;
     private final String KEY1 = "LoginKeyName";
+    private final String KEY2 = "Clubber1ActivityKeyName";
     //global text view object
     TextView textView;
 
@@ -40,7 +41,7 @@ public class Clubber1Activity extends AppCompatActivity {//replace AppCompatActi
         textView.setText("");
         setWelcomeMessage();
 
-      fragmentManager = getSupportFragmentManager();// transit fragment to activity
+        fragmentManager = getSupportFragmentManager();// transit fragment to activity
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragmentclubber,new DjsListFragment()).commit();
 

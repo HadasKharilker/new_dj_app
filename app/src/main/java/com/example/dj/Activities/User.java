@@ -7,11 +7,13 @@ public class User {
     private String genre;
 
 
+
     public User(String email, String fullName, String userType, String genre) {
         this.email = email;
         this.fullName = fullName;
         this.userType = userType;
         this.genre =genre;
+
 
     }
     public User(){}
