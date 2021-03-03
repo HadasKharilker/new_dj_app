@@ -36,6 +36,7 @@ public class SongRequestFragment extends Fragment {
     private ArrayAdapter<String> adapter;
     private String selectedSong;
     private String djUID;
+    private String djName;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -139,18 +140,35 @@ public class SongRequestFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Clubber2Activity clubber2Activity =(Clubber2Activity)getActivity();
-                djUID =clubber2Activity.getDjUserId();//get the uid of the dj--> this return null ther is  bug here
 
+                //extract the djID FROM FIREBASE BASED ON NAME
+                djName=clubber2Activity.getNameOfDj();
+                DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference songsRef = rootRef.child("users");//users branch reference from firebase database
 
+                ValueEventListener eventListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {//for each LOOP running through all songs
+
+                            String fullName = ds.child("fullName").getValue(String.class);
+                            if(fullName.equals(djName)){ //check if the current user is a DJ
+                                djUID=ds.child("id").getValue(String.class);;//Adding only DJs full name to the list
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                };
+                songsRef.addListenerForSingleValueEvent(eventListener);
             }
         });
-
-
-
-
-
     }
+
+    //attach the req
+
 
 }
 
