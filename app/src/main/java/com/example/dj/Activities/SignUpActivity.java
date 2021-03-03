@@ -85,7 +85,7 @@ public class SignUpActivity extends AppCompatActivity {
                             DatabaseReference myRef = database.getReference("users").child(uid);
 
                             //generate an object of type person
-                            User u = new User(email, fullName, selectedUserType,selectedGenre);
+                            User u = new User(email, fullName, selectedUserType,selectedGenre,uid);
 
 
                             //sending the person object to database
