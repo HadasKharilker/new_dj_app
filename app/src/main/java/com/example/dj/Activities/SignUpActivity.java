@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.regex.Pattern;
+
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private final String KEY1 = "LoginKeyName";
@@ -29,6 +32,17 @@ public class SignUpActivity extends AppCompatActivity {
     private String selectedUserType;
     private String selectedGenre;
     private ImageView mImageView;
+private static final Pattern PASSWORD_PATTERN =
+        Pattern.compile("^" +
+                "(?=.*[0-9])" +  // at list 1 digit
+              "(?=\\S+$)" +  // no white spaces
+                ".{6,}" + // at list 6 characters minimum
+                "$");
+private static final Pattern FULL_NAME =
+        Pattern.compile("^" +
+               "(?=.*[a-zA-Z])" +  // at list any letter
+                ".{1,}" + // at list 1 characters minimum
+                "$");
 
 
 
@@ -38,28 +52,44 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
         String result = getIntent().getStringExtra(KEY1);
-
         mImageView = (ImageView) findViewById(R.id.imageView2);
         mImageView.setImageResource(R.drawable.main);
 
         initUserTypeSpinner(this);
         initGenreSpinner(this);
 
-
-
     }
-
-
 
     //Working with realtime database
     public void funcSignUp(View view) {
         //Extracting the user data from the text view sections
         EditText t = findViewById(R.id.email2);
-        String email = t.getText().toString();
+       // if(t.getText()==null){t.setError("Can't be empty");}
+        String email = t.getText().toString().trim();
+
+        //Email Validate
+        if(email.isEmpty()){t.setError("Can't be empty");}
+       else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            t.setError("Please enter a valid email address");
+        }
+        ////////////////////////////////////
         t = findViewById(R.id.password2);
         String password = t.getText().toString();
+
+        //PassWord Validate
+        if(password.isEmpty())
+        {t.setError("Can't be empty");}
+        else if(!PASSWORD_PATTERN.matcher(password).matches())
+        {t.setError("Password too weak");}
+        ///////////////////////////////////////
         t = findViewById(R.id.fullName);
         String fullName = t.getText().toString();
+        //FullName Validate
+        if(fullName.isEmpty())
+        {t.setError("Name can't be empty");}
+        else if(!FULL_NAME.matcher(fullName).matches())
+        {t.setError("Please enter a valid fullname");}
+        ////////////////////////////////////////
 
 
 
@@ -87,26 +117,18 @@ public class SignUpActivity extends AppCompatActivity {
                             //generate an object of type person
                             User u = new User(email, fullName, selectedUserType,selectedGenre,uid);
 
-
                             //sending the person object to database
                             myRef.setValue(u);
-
-
                         } else {
                             // If sign in fails, display a message to the user.
 
                             Toast.makeText(SignUpActivity.this, "Sign Up failed.",
                                     Toast.LENGTH_SHORT).show();
-
                         }
-
                         // ...
                     }
                 });
-
-
     }
-
 
 
     public void initUserTypeSpinner(SignUpActivity view){
