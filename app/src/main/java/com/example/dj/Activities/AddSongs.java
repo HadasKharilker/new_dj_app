@@ -21,8 +21,8 @@ public class AddSongs extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        DatabaseReference myRef = database.getReference("songs").child("4");
-        myRef.setValue("KSHMR, Yves V, Krewella – No Regrets");
+        DatabaseReference myRef = database.getReference("songs").child("10");
+        myRef.setValue("Jay Z - 99 Problems<");
 
 
 

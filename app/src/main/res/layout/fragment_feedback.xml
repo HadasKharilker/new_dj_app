@@ -75,6 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/feedbackrequestbutton"
+            android:onClick="SubmitFeedbackToDjListener"
             android:text="SEND FEEDBACK"
             android:textColor="#FFFFFF" />
     </LinearLayout>

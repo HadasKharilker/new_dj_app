@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Clubber2Activity">
+    tools:context=".Activities.DjActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/feedbackrequestbutton"
-                    android:onClick="inputfeedback"
+                    android:onClick="loadFeedbacksView"
                     android:text="SEE FEEDBACKS"
                     android:textColor="#FFFFFF"
                     android:textColorLink="#FFC107"
@@ -74,7 +74,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/feedbackrequestbutton"
-                    android:onClick="songrequest"
+                    android:onClick="loadRequestedSongssList"
                     android:text="REQUESTED SONGS"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp" />
@@ -89,7 +89,7 @@
             android:orientation="horizontal">
 
             <FrameLayout
-                android:id="@+id/request"
+                android:id="@+id/fragment_dj"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

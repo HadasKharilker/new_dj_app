@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dj.R;
@@ -16,6 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -65,8 +71,32 @@ public class LoginActivity extends AppCompatActivity {
 
 
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //moving to Main Activity layout if the login is successful
-                            funcButtonToClubber1Activity();
+                            String uid = user.getUid();
+                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
+
+                            // Read User Object from the database
+                            myRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    // This method is called once with the initial value and again
+                                    // whenever data at this location is updated.
+                                    User value = dataSnapshot.getValue(User.class);
+                                    if(value.getUserType()=="Clubber"){
+                                        funcButtonToClubber1Activity();
+
+                                    }
+                                    else{
+                                        funcButtonToDjActivity(uid);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    // Failed to read value
+                                    Toast.makeText(LoginActivity.this, "DB reading  failed.",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            });
 
 
                         } else {
@@ -84,12 +114,22 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void funcButtonToDjActivity(String uid) {
+        Intent intent = new Intent(this, DjActivity.class);
+        intent.putExtra("KEY1",uid);
+
+
+        startActivity(intent);
+    }
+
+
 
     //moving to new layout when clicking on Register button
     public void funcButtonToSignUp(View view) {
 
 
         Intent intent = new Intent(this, SignUpActivity.class);
+
 
 
         startActivity(intent);
@@ -129,12 +169,38 @@ public class LoginActivity extends AppCompatActivity {
                                 //extract the user id
                                 String uid = user.getUid();
 
+                                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
+
+                                // Read User Object from the database
+                                myRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        // This method is called once with the initial value and again
+                                        // whenever data at this location is updated.
+                                        User value = dataSnapshot.getValue(User.class);
+                                        if(value.getUserType().equals("Clubber")){
+                                            funcButtonToClubber1Activity();
+
+                                        }
+                                        else{
+                                            funcButtonToDjActivity(value.getId());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError error) {
+                                        // Failed to read value
+                                        Toast.makeText(LoginActivity.this, "DB reading  failed.",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+
+
                                 Toast.makeText(LoginActivity.this, uid,
                                         Toast.LENGTH_LONG).show();
 
 
-                                //moving to Main Activity if the login is succesfull
-                                funcButtonToClubber1Activity();
                             }
                         }
                     });
