@@ -2,6 +2,7 @@ package com.example.dj.Fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.example.dj.Activities.Clubber2Activity;
+import com.example.dj.Activities.Playlist;
+import com.example.dj.Activities.User;
 import com.example.dj.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,7 +25,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -153,8 +158,57 @@ public class SongRequestFragment extends Fragment {
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {//for each LOOP running through all songs
 
                             String fullName = ds.child("fullName").getValue(String.class);
-                            if(fullName.equals(djName)){ //check if the current user is a DJ
-                                djUID=ds.child("id").getValue(String.class);;//Adding only DJs full name to the list
+                            if(fullName.equals(djName)){ //
+                                djUID=ds.child("id").getValue(String.class); //extrecting dj id
+
+
+                                //attach the song to dj playlist
+
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                //going to the relevant branch in the db
+
+                                final DatabaseReference myRef = database.getReference("djPlaylist");
+                                ValueEventListener eventListener1=(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        //check if there is a dj playlist allready exist
+                                        if (snapshot.hasChild(djUID))
+                                        {
+                                            for(DataSnapshot ds : snapshot.getChildren()){
+                                                String key = ds.getKey();
+                                                Map<String, Object> mHashmap = new HashMap<>();
+                                                mHashmap = (Map<String, Object>) snapshot.child(djUID).getValue();
+                                                mHashmap.put(selectedSong,true);
+                                                database.getReference("djPlaylist").child(djUID).updateChildren(mHashmap);
+
+
+
+                                            }
+
+
+                                        }
+                                        //in case this is the first playlist
+                                        else{
+                                            Map<String, Object> mHashmap = new HashMap<>();
+                                            mHashmap.put(selectedSong,true);
+
+                                            //sending the playlist object to database
+                                            database.getReference("djPlaylist").child(djUID).setValue(mHashmap);
+                                        }
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                                myRef.addListenerForSingleValueEvent(eventListener1);
+
+
+
+
                             }
                         }
                     }
@@ -163,11 +217,13 @@ public class SongRequestFragment extends Fragment {
                     }
                 };
                 songsRef.addListenerForSingleValueEvent(eventListener);
+
+
             }
         });
     }
 
-    //attach the req
+
 
 
 }

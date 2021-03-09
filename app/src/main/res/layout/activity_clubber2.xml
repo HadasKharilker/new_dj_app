@@ -88,7 +88,7 @@
             android:orientation="horizontal">
 
             <FrameLayout
-                android:id="@+id/request"
+                android:id="@+id/fragment_dj"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

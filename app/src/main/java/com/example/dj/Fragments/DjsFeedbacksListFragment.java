@@ -2,13 +2,32 @@ package com.example.dj.Fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.example.dj.Activities.Feedback;
+import com.example.dj.Activities.User;
+import com.example.dj.Adapters.FeedbackAdapter;
+import com.example.dj.Adapters.SongAdapter;
 import com.example.dj.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +35,10 @@ import com.example.dj.R;
  * create an instance of this fragment.
  */
 public class DjsFeedbacksListFragment extends Fragment {
+    private ListView feedbacksList;
+    private String userId;
+    private static String nameOfRater;
+    private FeedbackAdapter adapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +84,78 @@ public class DjsFeedbacksListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_djs__songs_list__fregment, container, false);
+        View view =inflater.inflate(R.layout.fragment_djs__feedback_list__fregment, container, false);
+
+
+        userId = this.getArguments().getString("data");
+
+        feedbacksList = (ListView) view.findViewById(R.id.idListView);
+        initFeedbacksList(view);
+
+        return view;
+
+    }
+
+    private void initFeedbacksList(View view) {
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("djFeedback");
+        DatabaseReference songsRef = rootRef.child(userId);//users branch reference from firebase database
+        List<Feedback> list = new ArrayList<>();
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {//for each LOOP running through all feedbacks
+                    Map<String, Object> mHashmap = new HashMap<>();
+                    mHashmap = (Map<String, Object>)ds.getValue();
+                    String nameOfRater=String.valueOf(mHashmap.get("nameOfRater"));
+
+
+/*
+                    //extract name of rater using his id
+                    DatabaseReference mDatabase;
+                    mDatabase = FirebaseDatabase.getInstance().getReference();
+
+                     mDatabase.child("users").child(idOfRater).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            if (!task.isSuccessful()) {
+                                DataSnapshot ds =task.getResult();
+                                User value =ds.getValue(User.class);
+                                nameOfRater=value.getFullName();
+
+
+
+                                Log.e("firebase", "Error getting data", task.getException());
+                            }
+                            else {
+                                Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                            }
+                        }
+                    });
+
+ */
+
+
+                    String feedBackText= String.valueOf(mHashmap.get("feedBackText"));
+                    String rating=String.valueOf(mHashmap.get("rating"));
+
+                    Feedback feedback = new Feedback(nameOfRater,rating,feedBackText);
+                    list.add(feedback);//Adding songs name to the list
+
+
+                }
+
+                adapter = new FeedbackAdapter(getActivity(), android.R.layout.simple_gallery_item, list);//adapting the data int the array list to listView data
+                feedbacksList.setAdapter(adapter);//setting the adapter to the list view
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        songsRef.addListenerForSingleValueEvent(eventListener);
+
+
     }
 }
