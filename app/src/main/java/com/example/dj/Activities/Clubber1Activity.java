@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -50,17 +51,17 @@ public class Clubber1Activity extends AppCompatActivity {//replace AppCompatActi
 
     public void loadDJsList(View view) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentclubber,new DjsListFragment()).addToBackStack(null).commit();
+        fragmentTransaction.replace(R.id.fragmentclubber,new DjsListFragment()).commit();
     }
 
     public void loadClubsList(View view) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();//פתיחת טרנזקציה
-        fragmentTransaction.replace(R.id.fragmentclubber,new ClubsListFragment()).addToBackStack(null).commit();
+        fragmentTransaction.replace(R.id.fragmentclubber,new ClubsListFragment()).commit();
     }
 
     public void loadGanreList(View view) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentclubber,new GanreListFragment()).addToBackStack(null).commit();
+        fragmentTransaction.replace(R.id.fragmentclubber,new GanreListFragment()).commit();
     }
 
     //getting the full name of the current user from the DB and display it on the text view
@@ -95,4 +96,23 @@ public class Clubber1Activity extends AppCompatActivity {//replace AppCompatActi
 
     }
 
+    public void funcButtonToSignOut(View view) {
+        FirebaseAuth.getInstance().signOut();
+
+        //clean the SharedPreferences of this app
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("keyUser", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+        finish();
+
+        SharedPreferences preferences2 = getApplicationContext().getSharedPreferences("passUser", MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = preferences2.edit();
+        editor2.clear();
+        editor2.apply();
+        finish();
+
+
+
+    }
 }

@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="#717171"
+        android:background="@android:color/holo_blue_light"
         android:orientation="horizontal"
         android:padding="10dp">
 
@@ -20,8 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFFFFF"
-            android:padding="10dp"
             android:listSelector="@color/light_blue"
+            android:padding="10dp"
 
             />
     </LinearLayout>

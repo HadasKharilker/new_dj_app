@@ -15,18 +15,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2.6"
-            android:background="#717171"
+            android:background="@android:color/background_light"
             android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/LeaveFeedback"
+                android:layout_width="198dp"
+                android:layout_height="37dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:onClick="funcButtonToSignOut"
+                android:text="SIGN OUT"
+
+                android:textSize="11dp"
+                app:backgroundTint="@android:color/holo_blue_light" />
 
             <TextView
                 android:id="@+id/nameOfDJ"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="NAME OF DJ"
-                android:textColor="#FFFFFF"
+                android:textColor="@android:color/holo_blue_dark"
                 android:textSize="36sp" />
 
         </LinearLayout>
@@ -35,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2.8"
-            android:background="#717171"
+            android:background="@android:color/holo_blue_light"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -86,6 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@android:color/holo_blue_light"
             android:orientation="horizontal">
 
             <FrameLayout
