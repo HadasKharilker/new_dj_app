@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DJ">
+
         <activity android:name=".Activities.AddSongs">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

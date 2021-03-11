@@ -93,6 +93,7 @@ public class Clubber2Activity extends AppCompatActivity {
 
             }
 
+
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value

@@ -13,13 +13,14 @@
         android:layout_weight="0.5"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <TextView
+            android:id="@+id/appname_textview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="false"
-            android:cropToPadding="false"
-            tools:src="@drawable/main" />
+            android:layout_height="230dp"
+            android:text="SIGN IN TO PRIVATE DJ "
+            android:fontFamily="">
+
+        </TextView>
     </LinearLayout>
 
     <LinearLayout

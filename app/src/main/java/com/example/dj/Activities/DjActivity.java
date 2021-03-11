@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -45,10 +46,7 @@ public class DjActivity extends AppCompatActivity {
         fragInfo.setArguments(data);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-
-
-
-        fragmentTransaction.add(R.id.fragment_dj,fragInfo).addToBackStack(null).commit();
+        fragmentTransaction.add(R.id.fragment_dj,fragInfo).commit();
     }
 
     public void loadRequestedSongssList(View view) {
@@ -57,7 +55,7 @@ public class DjActivity extends AppCompatActivity {
         DjsRequestedSongsFragment fragInfo= new DjsRequestedSongsFragment();
         fragInfo.setArguments(data);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_dj,fragInfo).addToBackStack(null).commit();
+        fragmentTransaction.replace(R.id.fragment_dj,fragInfo).commit();
     }
 
     public void loadFeedbacksView (View view) {
@@ -66,7 +64,7 @@ public class DjActivity extends AppCompatActivity {
         DjsFeedbacksListFragment fragInfo= new DjsFeedbacksListFragment();
         fragInfo.setArguments(data);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_dj,fragInfo).addToBackStack(null).commit();
+        fragmentTransaction.replace(R.id.fragment_dj,fragInfo).commit();
     }
 
     private void setWelcomeMessage() {
@@ -102,6 +100,26 @@ public class DjActivity extends AppCompatActivity {
 
     public String getUserId() {
         return userId;
+    }
+
+    public void funcButtonToSignOut(View view) {
+        FirebaseAuth.getInstance().signOut();
+
+        //clean the SharedPreferences of this app
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("keyUser", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+        finish();
+
+        SharedPreferences preferences2 = getApplicationContext().getSharedPreferences("passUser", MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = preferences2.edit();
+        editor2.clear();
+        editor2.apply();
+        finish();
+
+
+
     }
 
 
