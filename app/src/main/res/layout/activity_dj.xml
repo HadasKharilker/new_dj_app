@@ -19,7 +19,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/LeaveFeedback"
+
                 android:layout_width="198dp"
                 android:layout_height="37dp"
                 android:layout_gravity="bottom"
@@ -61,7 +61,7 @@
 
 
                 <Button
-                    android:id="@+id/LeaveFeedback"
+                    android:id="@+id/seeFeedback"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -82,6 +82,7 @@
                 android:paddingRight="30dp">
 
                 <Button
+                    android:id="@+id/requestedSongs"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

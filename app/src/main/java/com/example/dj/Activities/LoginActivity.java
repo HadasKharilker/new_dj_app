@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         //casting the text view to string
         String email = t.getText().toString();
         //finding the email Editiew to t
+
         //Email Validate
         if (email.isEmpty()) {
             t.setError("Email can't be empty");
@@ -67,8 +68,6 @@ public class LoginActivity extends AppCompatActivity {
         t = findViewById(R.id.password1);
         //casting the text view to string
         String password = t.getText().toString();
-
-
 
 
         //PassWord Validate
@@ -111,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                                         // This method is called once with the initial value and again
                                         // whenever data at this location is updated.
                                         User value = dataSnapshot.getValue(User.class);
-                                        if (value.getUserType() == "Clubber") {
+                                        if (value.getUserType().equals("Clubber")) {
                                             funcButtonToClubber1Activity();
 
                                         } else {
@@ -159,9 +158,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Intent intent = new Intent(this, SignUpActivity.class);
-
-
-
         startActivity(intent);
 
     }
@@ -172,7 +168,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Intent intent = new Intent(this, Clubber1Activity.class);
-
 
         startActivity(intent);
 

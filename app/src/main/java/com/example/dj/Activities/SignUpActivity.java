@@ -3,6 +3,8 @@ package com.example.dj.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -129,6 +131,8 @@ public class SignUpActivity extends AppCompatActivity {
 
                                 //sending the person object to database
                                 myRef.setValue(u);
+
+
                             } else {
                                 // If sign in fails, display a message to the user.
 
@@ -138,7 +142,10 @@ public class SignUpActivity extends AppCompatActivity {
                             // ...
                         }
                     });
+
+
         }
+
     }
 
 

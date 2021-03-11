@@ -22,7 +22,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/LeaveFeedback"
+                android:id="@+id/seeFeedback"
                 android:layout_width="198dp"
                 android:layout_height="37dp"
                 android:layout_gravity="bottom"

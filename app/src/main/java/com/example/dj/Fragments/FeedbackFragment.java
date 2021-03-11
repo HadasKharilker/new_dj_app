@@ -15,9 +15,11 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dj.Activities.Clubber2Activity;
 import com.example.dj.Activities.Feedback;
+import com.example.dj.Activities.LoginActivity;
 import com.example.dj.Activities.User;
 import com.example.dj.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -145,6 +147,7 @@ public class FeedbackFragment extends Fragment {
                                                 mHashmap = (Map<String, Object>) snapshot.child(djUID).getValue();
                                                 mHashmap.put(uid,feedback);
                                                 database.getReference("djFeedback").child(djUID).updateChildren(mHashmap);
+                                                Toast.makeText(getActivity(), "Feedback sended!", Toast.LENGTH_SHORT).show();
 
 
 
@@ -160,6 +163,7 @@ public class FeedbackFragment extends Fragment {
 
                                             //sending the playlist object to database
                                             database.getReference("djFeedback").child(djUID).setValue(mHashmap);
+                                            Toast.makeText(getActivity(), "Feedback sended!", Toast.LENGTH_SHORT).show();
                                         }
 
                                     }
