@@ -32,17 +32,18 @@ public class SignUpActivity extends AppCompatActivity {
     private String selectedUserType;
     private String selectedGenre;
     private ImageView mImageView;
-private static final Pattern PASSWORD_PATTERN =
+    private static final Pattern PASSWORD_PATTERN =
         Pattern.compile("^" +
                 "(?=.*[0-9])" +  // at list 1 digit
               "(?=\\S+$)" +  // no white spaces
                 ".{6,}" + // at list 6 characters minimum
                 "$");
-private static final Pattern FULL_NAME =
+    private static final Pattern FULL_NAME =
         Pattern.compile("^" +
                "(?=.*[a-zA-Z])" +  // at list any letter
                 ".{1,}" + // at list 1 characters minimum
                 "$");
+
 
 
 
@@ -62,14 +63,29 @@ private static final Pattern FULL_NAME =
 
     //Working with realtime database
     public void funcSignUp(View view) {
+
+        // fullName validation
+        ///////////////////////////////////////
+        EditText t = findViewById(R.id.fullName);
+        String fullName = t.getText().toString();
+        //FullName Validate
+        if (fullName.isEmpty()) {
+            t.setError("Name can't be empty");
+        } else if (!FULL_NAME.matcher(fullName).matches()) {
+            t.setError("Please enter a valid fullname");
+        }
+        ////////////////////////////////////////
+
+
         //Extracting the user data from the text view sections
-        EditText t = findViewById(R.id.email2);
-       // if(t.getText()==null){t.setError("Can't be empty");}
+        t = findViewById(R.id.email2);
+        // if(t.getText()==null){t.setError("Can't be empty");}
         String email = t.getText().toString().trim();
 
         //Email Validate
-        if(email.isEmpty()){t.setError("Can't be empty");}
-       else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (email.isEmpty()) {
+            t.setError("Email can't be empty");
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             t.setError("Please enter a valid email address");
         }
         ////////////////////////////////////
@@ -77,57 +93,52 @@ private static final Pattern FULL_NAME =
         String password = t.getText().toString();
 
         //PassWord Validate
-        if(password.isEmpty())
-        {t.setError("Can't be empty");}
-        else if(!PASSWORD_PATTERN.matcher(password).matches())
-        {t.setError("Password too weak");}
-        ///////////////////////////////////////
-        t = findViewById(R.id.fullName);
-        String fullName = t.getText().toString();
-        //FullName Validate
-        if(fullName.isEmpty())
-        {t.setError("Name can't be empty");}
-        else if(!FULL_NAME.matcher(fullName).matches())
-        {t.setError("Please enter a valid fullname");}
-        ////////////////////////////////////////
+        if (password.isEmpty()) {
+            t.setError("Password can't be empty");
+        } else if (!PASSWORD_PATTERN.matcher(password).matches()) {
+            t.setError("Password is not valid");
+        }
 
 
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(SignUpActivity.this, "Sign Up OK.",
-                                    Toast.LENGTH_SHORT).show();
-
-                            //get the user object
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                            //extract the user id
-                            String uid = user.getUid();
+        if (!email.isEmpty() && !password.isEmpty()) {
 
 
-                            // Write a message to the database
-                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            //going to the relevant branch in the db
-                            DatabaseReference myRef = database.getReference("users").child(uid);
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Toast.makeText(SignUpActivity.this, "Sign Up OK.",
+                                        Toast.LENGTH_SHORT).show();
 
-                            //generate an object of type person
-                            User u = new User(email, fullName, selectedUserType,selectedGenre,uid);
+                                //get the user object
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                            //sending the person object to database
-                            myRef.setValue(u);
-                        } else {
-                            // If sign in fails, display a message to the user.
+                                //extract the user id
+                                String uid = user.getUid();
 
-                            Toast.makeText(SignUpActivity.this, "Sign Up failed.",
-                                    Toast.LENGTH_SHORT).show();
+
+                                // Write a message to the database
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                //going to the relevant branch in the db
+                                DatabaseReference myRef = database.getReference("users").child(uid);
+
+                                //generate an object of type person
+                                User u = new User(email, fullName, selectedUserType, selectedGenre, uid);
+
+                                //sending the person object to database
+                                myRef.setValue(u);
+                            } else {
+                                // If sign in fails, display a message to the user.
+
+                                Toast.makeText(SignUpActivity.this, "Sign Up failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            // ...
                         }
-                        // ...
-                    }
-                });
+                    });
+        }
     }
 
 
