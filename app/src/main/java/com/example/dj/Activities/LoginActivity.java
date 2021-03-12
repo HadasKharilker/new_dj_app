@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;//firebase login with email and password
     SharedPreferences sharedPreferences;
     private final String KEY1 = "LoginKeyName";
+
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" +  // at list 1 digit
@@ -48,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
 
 
     public void funcLogIn(View view) {
@@ -146,9 +149,8 @@ public class LoginActivity extends AppCompatActivity {
     private void funcButtonToDjActivity(String uid) {
         Intent intent = new Intent(this, DjActivity.class);
         intent.putExtra("KEY1",uid);
-
-
         startActivity(intent);
+
     }
 
 

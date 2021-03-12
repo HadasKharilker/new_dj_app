@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.dj.Activities.Clubber2Activity;
 import com.example.dj.Activities.Playlist;
@@ -180,6 +181,7 @@ public class SongRequestFragment extends Fragment {
                                                 mHashmap = (Map<String, Object>) snapshot.child(djUID).getValue();
                                                 mHashmap.put(selectedSong,true);
                                                 database.getReference("djPlaylist").child(djUID).updateChildren(mHashmap);
+                                                Toast.makeText(getActivity(), "Your song has been sended!", Toast.LENGTH_SHORT).show();
 
 
 
@@ -194,6 +196,7 @@ public class SongRequestFragment extends Fragment {
 
                                             //sending the playlist object to database
                                             database.getReference("djPlaylist").child(djUID).setValue(mHashmap);
+                                            Toast.makeText(getActivity(), "Your song has been sended!", Toast.LENGTH_SHORT).show();
                                         }
 
 

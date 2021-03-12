@@ -16,19 +16,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2.6"
             android:background="@android:color/background_light"
-            android:orientation="horizontal">
-
-            <Button
-
-                android:layout_width="198dp"
-                android:layout_height="37dp"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:onClick="funcButtonToSignOut"
-                android:text="SIGN OUT"
-
-                android:textSize="11dp"
-                app:backgroundTint="@android:color/holo_blue_light" />
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/nameOfDJ"
@@ -36,10 +24,23 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:fontFamily="@font/annie_use_your_telescope"
                 android:gravity="center"
                 android:text="NAME OF DJ"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="36sp" />
+
+            <Button
+
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:onClick="funcButtonToSignOut"
+                android:text="SIGN OUT"
+
+                android:textSize="11dp"
+                app:backgroundTint="@android:color/holo_blue_light" />
 
         </LinearLayout>
 
