@@ -16,8 +16,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,12 +43,23 @@ public class Clubber1Activity extends AppCompatActivity {//replace AppCompatActi
         textView = findViewById(R.id.name);
         textView.setText("");
         setWelcomeMessage();
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
+
 
         fragmentManager = getSupportFragmentManager();// transit fragment to activity
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragmentclubber,new DjsListFragment()).commit();
 
+
+
     }
+
+
+
+
+
 
 
     public void loadDJsList(View view) {
@@ -115,4 +128,6 @@ public class Clubber1Activity extends AppCompatActivity {//replace AppCompatActi
 
 
     }
+
+
 }

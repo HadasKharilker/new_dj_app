@@ -55,8 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
         String result = getIntent().getStringExtra(KEY1);
-        mImageView = (ImageView) findViewById(R.id.imageView2);
-        mImageView.setImageResource(R.drawable.main);
+
 
         initUserTypeSpinner(this);
         initGenreSpinner(this);

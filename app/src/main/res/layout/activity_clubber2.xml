@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2.6"
-            android:background="#717171"
+            android:background="@android:color/holo_blue_dark"
             android:orientation="vertical">
 
             <TextView
@@ -24,6 +24,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:fontFamily="@font/annie_use_your_telescope"
                 android:gravity="center"
                 android:textColor="#FFFFFF"
                 android:textSize="36sp" />
@@ -44,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2.8"
-            android:background="#717171"
+            android:background="@android:color/holo_blue_dark"
             android:gravity="center"
             android:orientation="horizontal">
 
