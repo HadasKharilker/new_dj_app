@@ -106,35 +106,8 @@ public class DjsFeedbacksListFragment extends Fragment {
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {//for each LOOP running through all feedbacks
                     Map<String, Object> mHashmap = new HashMap<>();
-                    mHashmap = (Map<String, Object>)ds.getValue();
+                    mHashmap = (Map<String, Object>)ds.getValue();//all the feedbacks of the current dj
                     String nameOfRater=String.valueOf(mHashmap.get("nameOfRater"));
-
-
-/*
-                    //extract name of rater using his id
-                    DatabaseReference mDatabase;
-                    mDatabase = FirebaseDatabase.getInstance().getReference();
-
-                     mDatabase.child("users").child(idOfRater).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            if (!task.isSuccessful()) {
-                                DataSnapshot ds =task.getResult();
-                                User value =ds.getValue(User.class);
-                                nameOfRater=value.getFullName();
-
-
-
-                                Log.e("firebase", "Error getting data", task.getException());
-                            }
-                            else {
-                                Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                            }
-                        }
-                    });
-
- */
-
 
                     String feedBackText= String.valueOf(mHashmap.get("feedBackText"));
                     String rating=String.valueOf(mHashmap.get("rating"));

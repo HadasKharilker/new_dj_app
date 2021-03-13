@@ -133,7 +133,7 @@
                 android:fontFamily="@font/annie_use_your_telescope"
                 android:text="Don't have an account yet?"
                 android:textColor="#005A82"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/seeFeedback"

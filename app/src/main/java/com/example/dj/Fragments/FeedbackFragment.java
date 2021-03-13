@@ -90,14 +90,8 @@ public class FeedbackFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_feedback, container, false);
         // פעולות נעשה פה
-        curUserName = this.getArguments().getString("data");
-
-
+        curUserName = this.getArguments().getString("data");//getting the current user full name
         SubmitFeedbackToDjListener(view);
-
-
-
-
         return  view;
     }
 
@@ -109,7 +103,7 @@ public class FeedbackFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Clubber2Activity clubber2Activity =(Clubber2Activity)getActivity();
+                Clubber2Activity clubber2Activity =(Clubber2Activity)getActivity();//creating instance of current activity
 
                 //extract the djID FROM FIREBASE BASED ON NAME
                 djName=clubber2Activity.getNameOfDj();
@@ -125,10 +119,10 @@ public class FeedbackFragment extends Fragment {
                             String fullName = ds.child("fullName").getValue(String.class);
                             if(fullName.equals(djName)){ //
                                 djUID=ds.child("id").getValue(String.class); //extrecting dj id
-                                //attach the feedback to a dj
-                                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                //going to the relevant branch in the db
 
+                                //attach the feedback to a dj
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();//new instance of db
+                                //going to the relevant branch in the db
                                 final DatabaseReference myRef = database.getReference("djFeedback");
                                 ValueEventListener eventListener1=(new ValueEventListener() {
                                     @Override
@@ -137,7 +131,8 @@ public class FeedbackFragment extends Fragment {
                                         final  EditText feedbackText= view.findViewById(R.id.textFeedback);
                                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                         String uid = user.getUid();
-                                        //check if there is a dj playlist allready exist
+
+                                        //check if there is at list 1 dj feedback allready
                                         if (snapshot.hasChild(djUID))
                                         {
                                             for(DataSnapshot ds : snapshot.getChildren()){
@@ -155,7 +150,7 @@ public class FeedbackFragment extends Fragment {
 
 
                                         }
-                                        //in case this is the first playlist of this DJ
+                                        //in case this is the first feedback of this DJ
                                         else{
                                             Feedback feedback=new Feedback(curUserName,String.valueOf((int)ratingBar.getRating()),feedbackText.getText().toString());
                                             Map<String, Object> mHashmap = new HashMap<>();
