@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.dj.Fragments.ClubsListFragment;
 import com.example.dj.Fragments.DjsListFragment;
-import com.example.dj.Fragments.GanreListFragment;
 import com.example.dj.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -16,10 +14,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,8 +54,8 @@ public class Clubber1Activity extends AppCompatActivity {//replace AppCompatActi
     public void setWelcomeMessage() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users").child(uid);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();//creating instance of db
+        DatabaseReference myRef = database.getReference("users").child(uid);//going to users root
 
 
         // Read User Object from the database
@@ -86,6 +82,7 @@ public class Clubber1Activity extends AppCompatActivity {//replace AppCompatActi
 
     }
 
+
     public void funcButtonToSignOut(View view) {
         FirebaseAuth.getInstance().signOut();
 
@@ -94,13 +91,13 @@ public class Clubber1Activity extends AppCompatActivity {//replace AppCompatActi
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
         editor.apply();
-        finish();
+        finish();//exiting current activity
 
         SharedPreferences preferences2 = getApplicationContext().getSharedPreferences("passUser", MODE_PRIVATE);
         SharedPreferences.Editor editor2 = preferences2.edit();
         editor2.clear();
         editor2.apply();
-        finish();
+        finish();///exiting current activity
 
 
 

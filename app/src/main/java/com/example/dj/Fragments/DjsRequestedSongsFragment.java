@@ -81,12 +81,13 @@ public class DjsRequestedSongsFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_djs_requested_songs, container, false);
         userId = this.getArguments().getString("data");
 
-        requestedSongList = (ListView) view.findViewById(R.id.idListView);
-        initRequestedSongsList(view);
+        requestedSongList = (ListView) view.findViewById(R.id.idListView);//finding the list view item
+        initRequestedSongsList(view);//setting the dj playlist into list view in view
 
         return view;
     }
 
+    //assign the dj playlist to list view
     public void initRequestedSongsList(View view) {
 
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("djPlaylist");

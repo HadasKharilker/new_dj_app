@@ -96,7 +96,7 @@ public class DjsListFragment extends Fragment {
        djList = (ListView) view.findViewById(R.id.idListView);//saving listitem from fragment view into djList param
        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
        DatabaseReference usersRef = rootRef.child("users");//users branch reference from firebase database
-       List<String> list = new ArrayList<>();
+       List<String> list = new ArrayList<>();//primitive array list
 
        ValueEventListener eventListener = new ValueEventListener() {
            @Override

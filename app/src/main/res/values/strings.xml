@@ -16,20 +16,7 @@
         <item>Techno</item>
     </string-array>
 
-    <string-array name="songs_array">
-        <item>Avicii – Tough Love</item>
-        <item>Joel Fletcher and Krunk! Feat. Savage – Same Year (Original Remix)</item>
-        <item>Marshmello ft. A Day To Remember – Rescue Me (Original Mix)</item>
-        <item>KSHMR, Yves V, Krewella – No Regrets</item>
-        <item>Galantis, Yellow Claw – We Can Get High</item>
-        <item>Armin van Buuren, Luke Bond, Karra – Revolution</item>
-        <item>UMEK – Vibrancy</item>
-        <item>Tiesto – The Business </item>
-        <item>P Diddy – Mo Money Mo Problem</item>
-        <item>Jay Z - 99 Problems</item>
-        <item>Beyonce - Crazy In Love</item>
 
-    </string-array>
 
     <string-array name="clubs_array">
        <item>choose from list</item>

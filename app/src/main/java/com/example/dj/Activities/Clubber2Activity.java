@@ -44,8 +44,9 @@ public class Clubber2Activity extends AppCompatActivity {
         nameOfDj = getIntent().getStringExtra("KEY2");//getting the name of the Dj , that the user choose in the djs list fragment
         textView = findViewById(R.id.nameOfDJ);
         textView.setText("DJ " + nameOfDj);
-        setDjRating();
-        moveToFeedbackFragment();
+
+        setDjRating();//display the current average dj rating
+        moveToFeedbackFragment();//setting default fragment to feedback fragment
 
 
     }
@@ -103,9 +104,8 @@ public class Clubber2Activity extends AppCompatActivity {
     }
 
     public void moveToFeedbackFragment() {
-        //get the user object
+        //get the current user object
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         //extract the user id
         String uid = user.getUid();
 
@@ -124,7 +124,7 @@ public class Clubber2Activity extends AppCompatActivity {
                 userName = value.getFullName();
                 Bundle data = new Bundle();//Use bundle to pass data
                 data.putString("data", userName);//put string, int, etc in bundle with a key value
-                FeedbackFragment fragInfo = new FeedbackFragment();
+                FeedbackFragment fragInfo = new FeedbackFragment();//creating new instance of feedback Fragment
                 fragInfo.setArguments(data);
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.fragment_dj, fragInfo).commit();
