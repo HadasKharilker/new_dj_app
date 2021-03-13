@@ -16,8 +16,6 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.dj.Activities.Clubber2Activity;
-import com.example.dj.Activities.Playlist;
-import com.example.dj.Activities.User;
 import com.example.dj.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -141,7 +139,7 @@ public class SongRequestFragment extends Fragment {
 
 
     public void requestSongButtonListener(View view){
-        Button b = view.findViewById(R.id.SongRequestButton);
+        Button b = view.findViewById(R.id.songrequestbutton);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

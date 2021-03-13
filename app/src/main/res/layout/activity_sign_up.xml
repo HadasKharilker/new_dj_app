@@ -20,7 +20,8 @@
             android:fontFamily="@font/annie_use_your_telescope"
             android:gravity="center"
             android:text="Create an acount"
-            android:textSize="40dp" />
+            android:textColor="#005A82"
+            android:textSize="50dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -116,9 +117,12 @@
             android:id="@+id/signUpButtonReg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/annie_use_your_telescope"
             android:onClick="funcSignUp"
             android:text="Sign Up"
-            app:backgroundTint="@android:color/holo_blue_light" />
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:backgroundTint="#005A82" />
     </LinearLayout>
 
 </LinearLayout>

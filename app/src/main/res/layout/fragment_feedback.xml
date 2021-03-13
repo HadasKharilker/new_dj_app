@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_dark"
+    android:background="#005A82"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".Fragments.FeedbackFragment"
@@ -51,6 +51,7 @@
             android:layout_weight="1"
             android:background="#FFFFFF"
             android:ems="10"
+            android:fontFamily="@font/annie_use_your_telescope"
             android:gravity="start|top"
             android:hint="Enter feedback"
             android:inputType="textMultiLine"
@@ -75,9 +76,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/feedbackrequestbutton"
+            android:fontFamily="@font/annie_use_your_telescope"
             android:onClick="SubmitFeedbackToDjListener"
             android:text="SEND FEEDBACK"
-            android:textColor="#FFFFFF" />
+            android:textColor="#005A82"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:backgroundTint="#FFFFFF" />
     </LinearLayout>
 
 </LinearLayout>

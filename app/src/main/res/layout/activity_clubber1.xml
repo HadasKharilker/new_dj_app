@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#81FFFFFF"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -19,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2.2"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="5dp">
 
             <TextView
                 android:id="@+id/name"
@@ -29,7 +31,7 @@
                 android:fontFamily="@font/annie_use_your_telescope"
                 android:gravity="center"
                 android:text="CLUBBER"
-                android:textColor="#1B1414"
+                android:textColor="#005A82"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -39,11 +41,14 @@
                 android:layout_height="90dp"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
+                android:fontFamily="@font/annie_use_your_telescope"
                 android:onClick="funcButtonToSignOut"
-                android:text="SIGN OUT"
 
-                android:textSize="11dp"
-                app:backgroundTint="@android:color/holo_blue_light" />
+                android:paddingLeft="16dp"
+                android:text="SIGN OUT"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:backgroundTint="#005A82" />
 
         </LinearLayout>
 
@@ -55,41 +60,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2.15"
-            android:background="@android:color/holo_blue_dark"
+            android:background="@drawable/bg"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/DjButton"
+            <TextView
+                android:id="@+id/djs"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/djbutton"
-                android:onClick="loadDJsList"
-                android:text="DJ"
-                app:backgroundTint="#FFFFFF"
-                app:backgroundTintMode="multiply" />
-
-            <Button
-                android:id="@+id/ClubButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/club"
-                android:onClick="loadClubsList"
-                android:text="CLUB"
-                app:backgroundTint="#FFFFFF"
-                app:backgroundTintMode="multiply" />
-
-            <Button
-                android:id="@+id/GanreButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/ganre"
-                android:onClick="loadGanreList"
-                android:text="GANRE"
-                app:backgroundTint="#FFFFFF"
-                app:backgroundTintMode="multiply" />
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:gravity="center"
+                android:text="Your favorite DJ"
+                android:textColor="#FFFFFF"
+                android:textSize="60sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
