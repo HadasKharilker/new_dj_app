@@ -5,7 +5,6 @@
         <item>Clubber</item>
 
     </string-array>
-
     <string-array name="genre_type_array">
         <item>Trance</item>
         <item>Dubstep</item>
@@ -15,8 +14,8 @@
         <item>Rock</item>
         <item>Trap</item>
         <item>Techno</item>
-
     </string-array>
+
     <string-array name="songs_array">
         <item>Avicii – Tough Love</item>
         <item>Joel Fletcher and Krunk! Feat. Savage – Same Year (Original Remix)</item>
@@ -29,6 +28,18 @@
         <item>P Diddy – Mo Money Mo Problem</item>
         <item>Jay Z - 99 Problems</item>
         <item>Beyonce - Crazy In Love</item>
+
+    </string-array>
+
+    <string-array name="clubs_array">
+       <item>choose from list</item>
+        <item>Havana Music Club</item>
+        <item>Haoman 17</item>
+        <item>The Block</item>
+        <item>Kuli Alma</item>
+        <item>Breakfast Club</item>
+        <item>Story</item>
+        <item>Bootleg</item>
 
     </string-array>
 
