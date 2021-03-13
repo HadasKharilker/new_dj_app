@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/holo_blue_light"
+        android:background="#005A82"
         android:orientation="horizontal"
         android:padding="10dp">
 
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFFFFF"
-            android:listSelector="@color/light_blue"
+            android:listSelector="#005A82"
             android:padding="10dp"
 
 

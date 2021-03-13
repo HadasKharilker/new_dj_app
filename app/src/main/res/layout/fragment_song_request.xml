@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/holo_blue_dark"
+        android:background="#005A82"
         android:orientation="horizontal"
         android:padding="10dp">
 
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFFFFF"
-            android:listSelector="@color/light_blue"
+            android:listSelector="#005A82"
             android:padding="10dp"
 
             />
@@ -30,19 +30,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="5"
-        android:background="@android:color/holo_blue_dark"
+        android:background="#005A82"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="50dp"
         android:paddingRight="50dp">
 
         <Button
-            android:id="@+id/SongRequestButton"
+            android:id="@+id/songrequestbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/annie_use_your_telescope"
             android:onClick="requestSongButtonListener"
-            android:text="REQUEST" />
+            android:text="REQUEST"
+            android:textColor="#005A82"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:backgroundTint="#FFFFFF" />
     </LinearLayout>
 
 </LinearLayout>

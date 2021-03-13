@@ -51,31 +51,8 @@ public class Clubber1Activity extends AppCompatActivity {//replace AppCompatActi
         fragmentManager = getSupportFragmentManager();// transit fragment to activity
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragmentclubber,new DjsListFragment()).commit();
-
-
-
     }
 
-
-
-
-
-
-
-    public void loadDJsList(View view) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentclubber,new DjsListFragment()).commit();
-    }
-
-    public void loadClubsList(View view) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();//פתיחת טרנזקציה
-        fragmentTransaction.replace(R.id.fragmentclubber,new ClubsListFragment()).commit();
-    }
-
-    public void loadGanreList(View view) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentclubber,new GanreListFragment()).commit();
-    }
 
     //getting the full name of the current user from the DB and display it on the text view
     public void setWelcomeMessage() {
