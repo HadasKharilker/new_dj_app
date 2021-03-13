@@ -140,7 +140,7 @@ public class SongRequestFragment extends Fragment {
 
     public void requestSongButtonListener(View view){
 
-        Button b = view.findViewById(R.id.SongRequestButton);//getting the request button from ui
+        Button b = view.findViewById(R.id.Songrequestbutton);//getting the request button from ui
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override

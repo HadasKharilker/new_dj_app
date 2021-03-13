@@ -174,7 +174,7 @@ public class DjActivity extends AppCompatActivity {
                     for (DataSnapshot ds : snapshot.getChildren()) {
 
                         database.getReference("djClub").child(userId).setValue(selectedClub);
-                        Toast.makeText(DjActivity.this, "Your song has been sended!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DjActivity.this, "Your home club has been updated!", Toast.LENGTH_SHORT).show();
 
 
                     }
