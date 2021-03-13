@@ -100,7 +100,7 @@ public class SongRequestFragment extends Fragment {
     public void initSongsList(View view) {
 
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference songsRef = rootRef.child("songs");//users branch reference from firebase database
+        DatabaseReference songsRef = rootRef.child("songs");//songs branch reference from firebase database
         List<String> list = new ArrayList<>();
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
@@ -141,11 +141,11 @@ public class SongRequestFragment extends Fragment {
 
 
     public void requestSongButtonListener(View view){
-        Button b = view.findViewById(R.id.SongRequestButton);
+        Button b = view.findViewById(R.id.SongRequestButton);//getting the request button from ui
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Clubber2Activity clubber2Activity =(Clubber2Activity)getActivity();
+                Clubber2Activity clubber2Activity =(Clubber2Activity)getActivity();//instance of clubber2 Activity
 
                 //extract the djID FROM FIREBASE BASED ON NAME
                 djName=clubber2Activity.getNameOfDj();
@@ -164,7 +164,6 @@ public class SongRequestFragment extends Fragment {
 
 
                                 //attach the song to dj playlist
-
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 //going to the relevant branch in the db
 
@@ -225,8 +224,6 @@ public class SongRequestFragment extends Fragment {
             }
         });
     }
-
-
 
 
 }

@@ -93,10 +93,11 @@ public class DjsListFragment extends Fragment {
     //handling Dj names list
    public void initDjsNameListView(View view){
        //display djs name in the list view
-       djList = (ListView) view.findViewById(R.id.idListView);
+       djList = (ListView) view.findViewById(R.id.idListView);//saving listitem from fragment view into djList param
        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
        DatabaseReference usersRef = rootRef.child("users");//users branch reference from firebase database
        List<String> list = new ArrayList<>();
+
        ValueEventListener eventListener = new ValueEventListener() {
            @Override
            public void onDataChange(DataSnapshot dataSnapshot) {

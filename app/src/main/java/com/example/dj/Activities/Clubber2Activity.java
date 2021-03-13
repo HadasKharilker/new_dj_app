@@ -47,9 +47,7 @@ public class Clubber2Activity extends AppCompatActivity {
         setDjRating();
         moveToFeedbackFragment();
 
-        //fragmentManager = getSupportFragmentManager();// transit fragment to activity
-        //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //fragmentTransaction.add(R.id.fragment_dj, new FeedbackFragment()).commit();
+
     }
 
 
@@ -162,7 +160,7 @@ public class Clubber2Activity extends AppCompatActivity {
                         djUID = ds.child("id").getValue(String.class); //extrecting dj id
 
 
-                        //geting all ratings of dj
+                        //instance of db
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
                         //going to the relevant branch in the db
@@ -190,6 +188,9 @@ public class Clubber2Activity extends AppCompatActivity {
                                         djAverage = totalStars / count;
                                         RatingBar rating = (RatingBar) findViewById(R.id.rating);
                                         rating.setRating(djAverage);
+
+                                        textView=findViewById(R.id.numraters);
+                                        textView.setText("("+String.valueOf(count)+" Clubbers)");
                                     }
 
 
@@ -202,6 +203,37 @@ public class Clubber2Activity extends AppCompatActivity {
                         });
                         feedbackRoot.addListenerForSingleValueEvent(eventListener1);
 
+
+                        //
+                       final  DatabaseReference myRef2 = database.getReference("djClub");
+                        //DatabaseReference clubRoot = myRef2.child(djUID);
+                        ValueEventListener eventListener2 = (new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                textView=findViewById(R.id.club);
+
+                                if(snapshot.hasChildren()) {
+                                    for (DataSnapshot ds : snapshot.getChildren()) {
+                                        if(ds.getKey().equals(djUID)){
+                                            String club=(String)ds.getValue();
+                                            textView.setText(club);
+                                        }
+                                    }
+                                }
+                                else{
+                                    textView.setText("");
+
+                                }
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                        myRef2.addListenerForSingleValueEvent(eventListener2);
 
                     }
                 }

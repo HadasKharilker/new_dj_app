@@ -1,5 +1,6 @@
 package com.example.dj.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -8,6 +9,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +28,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DjActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private final String KEY1 = "LoginKeyName";
+    private Spinner spinnerClubs;
+    private String selectedClub;
     TextView textView;
     private String userId;
 
@@ -38,33 +48,37 @@ public class DjActivity extends AppCompatActivity {
 
         //display welcome username message in the userName textview
         setWelcomeMessage();
+        //init clubs spinner with values
+        initClubSpinner();
+        //set the on updateClub listener
+
 
         fragmentManager = getSupportFragmentManager();// transit fragment to activity
         Bundle data = new Bundle();//Use bundle to pass data
         data.putString("data", userId);//put string, int, etc in bundle with a key value
-        DjsFeedbacksListFragment fragInfo= new DjsFeedbacksListFragment();
+        DjsFeedbacksListFragment fragInfo = new DjsFeedbacksListFragment();
         fragInfo.setArguments(data);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.add(R.id.fragment_dj,fragInfo).commit();
+        fragmentTransaction.add(R.id.fragment_dj, fragInfo).commit();
     }
 
     public void loadRequestedSongssList(View view) {
         Bundle data = new Bundle();//Use bundle to pass data
         data.putString("data", userId);//put string, int, etc in bundle with a key value
-        DjsRequestedSongsFragment fragInfo= new DjsRequestedSongsFragment();
+        DjsRequestedSongsFragment fragInfo = new DjsRequestedSongsFragment();
         fragInfo.setArguments(data);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_dj,fragInfo).commit();
+        fragmentTransaction.replace(R.id.fragment_dj, fragInfo).commit();
     }
 
-    public void loadFeedbacksView (View view) {
+    public void loadFeedbacksView(View view) {
         Bundle data = new Bundle();//Use bundle to pass data
         data.putString("data", userId);//put string, int, etc in bundle with a key value
-        DjsFeedbacksListFragment fragInfo= new DjsFeedbacksListFragment();
+        DjsFeedbacksListFragment fragInfo = new DjsFeedbacksListFragment();
         fragInfo.setArguments(data);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_dj,fragInfo).commit();
+        fragmentTransaction.replace(R.id.fragment_dj, fragInfo).commit();
     }
 
     private void setWelcomeMessage() {
@@ -82,7 +96,7 @@ public class DjActivity extends AppCompatActivity {
                 // whenever data at this location is updated.
                 User value = dataSnapshot.getValue(User.class);
                 TextView e = findViewById(R.id.nameOfDJ);
-                e.setText("Welcome DJ " +value.getFullName());
+                e.setText("Welcome DJ " + value.getFullName());
                 Toast.makeText(DjActivity.this, "DB reading OK.",
                         Toast.LENGTH_LONG).show();
             }
@@ -98,9 +112,6 @@ public class DjActivity extends AppCompatActivity {
 
     }
 
-    public String getUserId() {
-        return userId;
-    }
 
     public void funcButtonToSignOut(View view) {
         FirebaseAuth.getInstance().signOut();
@@ -119,8 +130,72 @@ public class DjActivity extends AppCompatActivity {
         finish();
 
 
+    }
+
+    public void initClubSpinner() {
+        //init spinner values
+        spinnerClubs = (Spinner) findViewById(R.id.spinnerclubs);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.clubs_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinnerClubs.setAdapter(adapter);
+
+
+        //on item selected listener
+        spinnerClubs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                selectedClub = parentView.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                selectedClub = "Havana Music Club";
+            }
+
+        });
+
 
     }
 
+    public void updateClubButton(View view) {
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //going to the relevant branch in the db
+        final DatabaseReference myRef = database.getReference("djClub");
+        ValueEventListener eventListener1 = (new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //check if a club already exist
+                if (snapshot.hasChild(userId)) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+
+                        database.getReference("djClub").child(userId).setValue(selectedClub);
+                        Toast.makeText(DjActivity.this, "Your song has been sended!", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+
+                }
+                //in case this is the first playlist
+                else {
+                    //sending the playlist object to database
+                    database.getReference("djClub").child(userId).setValue(selectedClub);
+                    Toast.makeText(DjActivity.this, "Your home club is set!", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        myRef.addListenerForSingleValueEvent(eventListener1);
+    }
 }
