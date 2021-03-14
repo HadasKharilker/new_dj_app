@@ -12,13 +12,7 @@
         android:theme="@style/Theme.DJ">
         >
 
-        <activity android:name=".Activities.AddSongs">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Activities.AddSongs"/>
         <activity android:name=".Activities.DjActivity" />
         <activity android:name=".Activities.Clubber2Activity"/>
         <activity android:name=".Activities.Clubber1Activity"/>

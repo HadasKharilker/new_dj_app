@@ -172,9 +172,17 @@ public class DjActivity extends AppCompatActivity {
                 //check if a club already exist
                 if (snapshot.hasChild(userId)) {
                     for (DataSnapshot ds : snapshot.getChildren()) {
+                        if(!selectedClub.equals("choose from list")){
 
-                        database.getReference("djClub").child(userId).setValue(selectedClub);
-                        Toast.makeText(DjActivity.this, "Your home club has been updated!", Toast.LENGTH_SHORT).show();
+                            database.getReference("djClub").child(userId).setValue(selectedClub);
+                            Toast.makeText(DjActivity.this, "Your home club has been updated!", Toast.LENGTH_SHORT).show();
+
+                        }
+                        else{
+                            Toast.makeText(DjActivity.this, "Please Select a valid club from the list", Toast.LENGTH_SHORT).show();
+                        }
+
+
 
 
                     }
@@ -183,9 +191,15 @@ public class DjActivity extends AppCompatActivity {
                 }
                 //in case this is the first playlist
                 else {
-                    //sending the playlist object to database
-                    database.getReference("djClub").child(userId).setValue(selectedClub);
-                    Toast.makeText(DjActivity.this, "Your home club is set!", Toast.LENGTH_SHORT).show();
+                    if(!selectedClub.equals("choose from list")){
+                        //sending the playlist object to database
+                        database.getReference("djClub").child(userId).setValue(selectedClub);
+                        Toast.makeText(DjActivity.this, "Your home club is set!", Toast.LENGTH_SHORT).show();
+
+                    }
+                    else {
+                        Toast.makeText(DjActivity.this, "Please Select a valid club from the list", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
 

@@ -21,8 +21,8 @@ public class AddSongs extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        DatabaseReference myRef = database.getReference("songs").child("10");
-        myRef.setValue("Jay Z - 99 Problems<");
+        DatabaseReference myRef = database.getReference("songs").child("13");
+        myRef.setValue("Tiesto, Mabel – God Is A Dancer");
 
 
 
